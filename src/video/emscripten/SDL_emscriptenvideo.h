@@ -30,6 +30,11 @@
 
 #include <EGL/egl.h>
 
+typedef struct SDL_VideoData
+{
+    int num_windows;
+} SDL_VideoData;
+
 typedef struct SDL_WindowData
 {
 #if SDL_VIDEO_OPENGL_EGL
