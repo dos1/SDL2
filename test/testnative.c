@@ -200,7 +200,7 @@ main(int argc, char *argv[])
     SDL_SetWindowTitle(window, "SDL Native Window Test");
 
     /* Create the renderer */
-    renderer = SDL_CreateRenderer(window, -1, 0);
+    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_SOFTWARE);
     if (!renderer) {
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't create renderer: %s\n", SDL_GetError());
         quit(5);
