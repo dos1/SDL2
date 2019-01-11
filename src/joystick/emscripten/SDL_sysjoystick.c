@@ -165,6 +165,8 @@ SDL_SYS_JoystickInit(void)
     int retval, i, numjs;
     EmscriptenGamepadEvent gamepadState;
 
+    emscripten_sample_gamepad_data();
+
     numjoysticks = 0;
     numjs = emscripten_get_num_gamepads();
 
@@ -314,6 +316,7 @@ SDL_SYS_JoystickUpdate(SDL_Joystick * joystick)
     int i, result, buttonState;
 
     if (item) {
+        emscripten_sample_gamepad_data();
         result = emscripten_get_gamepad_status(item->index, &gamepadState);
         if( result == EMSCRIPTEN_RESULT_SUCCESS) {
             if(gamepadState.timestamp == 0 || gamepadState.timestamp != item->timestamp) {
