@@ -225,8 +225,7 @@ Emscripten_CreateWindow(_THIS, SDL_Window * window)
     scaled_w = SDL_floor(window->w * wdata->pixel_ratio);
     scaled_h = SDL_floor(window->h * wdata->pixel_ratio);
 
-    /* set a fake size to check if there is any CSS sizing the canvas */
-    emscripten_set_canvas_element_size(wdata->canvas_id, 1, 1);
+    emscripten_set_canvas_element_size(wdata->canvas_id, scaled_w, scaled_h);
     emscripten_get_element_css_size(wdata->canvas_id, &css_w, &css_h);
 
     wdata->external_size = SDL_floor(css_w) != scaled_w || SDL_floor(css_h) != scaled_h;
@@ -236,6 +235,7 @@ Emscripten_CreateWindow(_THIS, SDL_Window * window)
         scaled_w = css_w * wdata->pixel_ratio;
         scaled_h = css_h * wdata->pixel_ratio;
 
+        emscripten_set_canvas_element_size(wdata->canvas_id, scaled_w, scaled_h);
         SDL_SendWindowEvent(window, SDL_WINDOWEVENT_RESIZED, css_w, css_h);
     }
     emscripten_set_canvas_element_size(wdata->canvas_id, scaled_w, scaled_h);
